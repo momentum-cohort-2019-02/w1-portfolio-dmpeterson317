@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface|Source+Code+Pro');
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:300,600');
+
+/* 4 properties to note: scale, translate, rotate, opacity */
+
+:root {
+    --background: rgba(0, 214, 170, .7);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #222;
+    /* font-family: 'Work Sans', sans-serif; */
+    /* font:  "Abril Fatface", serif; */
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 400;
+}
+
+/* h1 { 
+    font: 50px/1.3 "Abril Fatface", serif; 
+    color: #fff; 
+    text-align: center;
+} */
+
+/* h2 {
+
+    font: 12px/1.7 'Source Code Pro', monospace;
+    color: #fff;
+	text-transform: uppercase;
+    text-align: center;
+}  */
+
+.content {
+    height: 100vh;
+    background-image: url(phil-botha-1308059-unsplash.jpg);
+    background-color: rgb(130, 127, 127);
+    background-blend-mode: multiply;
+    background-size: cover;
+    display: flex;
+    justify-content: center; 
+    flex-direction: column;
+
+    /* place-items: center; */
+    /* border: 5px solid red; */
+}
+
+.home-item {
+    color: white;
+    /* padding-top: 100px; */
+    margin: 50px;
+    /* border: 5px solid red; */
+
+}
+
+.home-picture {
+    color: white;
+    padding-top: 100px;
+    margin: 100px 150px 0px 150px;
+    /* border: 5px solid red; */
+}
+
+#round-corners {
+    border-radius: 100px;
+}
+
+header {
+    background: var(--background);
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+    /* display: flex; */
+    /* bc position fixed, z-index at 999 ensures it is on top  */
+}
+
+.nav-toggle {
+    display: none;
+    /* this is hiding my checkbox with class="nav-toggle" which
+    is the beginnings of our hamburger */
+}
+
+.nav-toggle-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 1em;
+    /* border: 1px solid red; */
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+    /* use pseudo elements on span, selecting before and after
+    pseudo elements and the span itself */
+    display: block;
+    background: white;
+    height: 2px;
+    width: 2em;
+    border-radius: 2px;
+    position: relative;
+}
+
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+    content: '';
+    position: absolute;
+}
+
+.nav-toggle-label span::before {
+    bottom: 7px;
+}
+
+.nav-toggle-label span::after {
+    top: 7px;
+}
+
+nav {
+    position: absolute;
+    text-align: left;
+    top: 100%;
+    /* top: 100% pixel pushes nav down from the top an arbitrary amount lul */
+    left: 0;
+    background: var(--background);
+    width: 100%;
+    transform: scale(1, 0);
+    /* transform: scale can take two args
+    x,y -- x at 1 keeps it 100% width, y at 0 smooshes it
+    to 0% -- x controls x axis, y controls y axis 
+    Default is smooshed */
+    transform-origin: top;
+    /* opens from top, default opens from center */
+    transition: transform 400ms ease-in-out;
+}  
+
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    margin-bottom: 1em;
+    margin-left: 1em;
+}
+
+nav a {
+    /* this style class point to links inside navigation/children of nav  */
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    /* text-transform: uppercase; */
+    opacity: 0;
+    /* opacity is 0 (invisible) from unchecked link at default state */
+    transition: opacity 150ms ease-in-out;
+    /* this transition kicks in when un-checking nav button */
+}
+
+nav a:hover {
+    color: #000;
+}
+
+.nav-toggle:checked ~ nav {
+    /* this style class with tilde looking for a nav that is sibling of nav-toggle
+     wtf is a sibling? */
+     transform: scale(1,1)
+    /* transform: scale can take two args
+    x,y -- x at 1 keeps it 100% width, y at 0 smooshes it
+    to 0% -- x controls x axis, y controls y axis. 
+    This attribute brings it back to 1,1*/
+}
+
+.nav-toggle:checked ~ nav a {
+    opacity: 1;
+    transition: opacity 250ms ease-in-out 250ms;
+    /* the second number is animation delay, take 250ms before 
+    you start transition */
+}
+
+
+
+@media screen and (min-width: 768px) {
+    .nav-toggle-label {
+        display: none;
+        /* gets rid of hamburger beyond 768px breakpoint */
+    }
+
+    header{
+        display: grid;
+        grid-template-columns: 1fr auto minmax(600px, 3fr) 1fr;
+        /* voodoo magic above and below */
+        /* minmax(600px which is never hit bc of media query
+        and 3fr which is the max width of column (3 times the
+        width of left and right column ends of grid */
+    }
+    
+    .logo {
+        grid-column: 2 / 3;
+    }
+
+    nav {
+        all: unset;
+        /* takes off all things done on mobile version styling 
+        above */
+        grid-column: 3 / 4;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    nav ul {
+        display: flex;
+        /* makes list items line up next to each other */
+        justify-content: flex-end;
+        /* pushes content to right side */
+        /* border: 1px solid red; */
+    }
+    
+    nav li {
+        margin-left: 3em;
+        margin-bottom: 0;
+    }
+
+    nav a {
+        opacity: 1;
+        position: relative;
+    }
+
+    nav a::before {
+        content: '';
+        display: block;
+        height: 5px;
+        background: black;
+        position: absolute;
+        top: -0.75em;
+        /* you can change this to bottom to underline
+        instead of top to overline kappa */
+        left: 0;
+        right: 0;
+        transform: scale(0, 1);
+        /* transform-origin: left; */
+        transition: transform ease-in-out 250ms;
+    }
+
+    nav a:hover::before {
+        transform: scale(1,1);
+    }
+
+    .content {
+        height: 200vh;
+        background-image: url(phil-botha-1308059-unsplash.jpg);
+        background-color: rgb(130, 127, 127);
+        background-blend-mode: multiply;
+        background-size: cover;
+        display: flex;
+        justify-content: center; 
+        flex-direction: row;
+    
+        /* place-items: center; */
+        /* border: 5px solid red; */
+    }
+
+    .home-item {
+        color: white;
+        padding-top: 100px;
+        flex-basis: 75%;
+        margin: 50px;
+        /* border: 5px solid red; */
+    
+    }
+    
+    .home-picture {
+        color: white;
+        padding-top: 100px;
+        flex-basis: 25%;
+        margin: 50px;
+        /* border: 5px solid red; */
+    }
+}
