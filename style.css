@@ -50,21 +50,32 @@ body {
 
 .home-item {
     color: white;
-    /* padding-top: 100px; */
+    
     margin: 50px;
     /* border: 5px solid red; */
 
 }
-
+img {
+    width:100%;
+    max-width:200px;
+    min-width: 100px;
+}
 .home-picture {
     color: white;
-    padding-top: 100px;
-    margin: 100px 150px 0px 150px;
+    padding-top: 200px;
+    /* margin: 135px; */
+    margin-left: 90px;
+    justify-content: center;
+
+    /* margin: 0px 150px 0px 150px; */
     /* border: 5px solid red; */
 }
 
 #round-corners {
-    border-radius: 100px;
+    border-top-left-radius:25%;
+    border-top-right-radius: 25%;
+    border-bottom-left-radius: 25%;
+    border-bottom-right-radius: 25%;
 }
 
 header {
@@ -78,7 +89,10 @@ header {
 }
 
 .nav-toggle {
-    display: none;
+    /* display: none; */
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
     /* this is hiding my checkbox with class="nav-toggle" which
     is the beginnings of our hamburger */
 }
@@ -139,7 +153,6 @@ nav {
     transition: transform 400ms ease-in-out;
 }  
 
-
 nav ul {
     margin: 0;
     padding: 0;
@@ -192,13 +205,17 @@ nav a:hover {
         /* gets rid of hamburger beyond 768px breakpoint */
     }
 
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0
+    }
+
     header{
         display: grid;
         grid-template-columns: 1fr auto minmax(600px, 3fr) 1fr;
-        /* voodoo magic above and below */
-        /* minmax(600px which is never hit bc of media query
-        and 3fr which is the max width of column (3 times the
-        width of left and right column ends of grid */
     }
     
     .logo {
@@ -254,33 +271,65 @@ nav a:hover {
     }
 
     .content {
+        display: grid;
+        /* grid-template-columns: 40px 50px auto 50px 40px; */
+        /* grid-template-rows: 25% 100px auto; */
+        /* grid-template-areas:
+            "home-pic home-item home-item home-item"
+            "home-pic home-item home-item home-item"; */
         height: 200vh;
         background-image: url(phil-botha-1308059-unsplash.jpg);
         background-color: rgb(130, 127, 127);
         background-blend-mode: multiply;
         background-size: cover;
-        display: flex;
-        justify-content: center; 
-        flex-direction: row;
-    
+        /* display: flex; */
+        /* display: inline-block; */
+        /* justify-content: center; 
+        flex-direction: row; */
+        
         /* place-items: center; */
-        /* border: 5px solid red; */
+        /* border: 5px solid blue; */
     }
 
-    .home-item {
-        color: white;
-        padding-top: 100px;
-        flex-basis: 75%;
-        margin: 50px;
-        /* border: 5px solid red; */
-    
+    img {
+        width:100%;
+        max-width:280px;
+        min-width: 200px;
+        padding-right: 30px;
+        /* padding-left: 10px; */
     }
-    
+
     .home-picture {
-        color: white;
-        padding-top: 100px;
-        flex-basis: 25%;
-        margin: 50px;
+        /* grid-column-start: 1; */
+        /* grid-column-end: span 2; */
+        /* grid-area: home-pic; */
+        /* justify-self: end; */
+        margin-top: 0;
+        /* color: white; */
+        /* width: 20%; */
+        /* display: inline-block; */
+        /* padding-top: 100px; */
+        /* flex-basis: 25%; */
+        /* margin-left: auto; */
+        /* margin-right: auto; */
         /* border: 5px solid red; */
     }
+    
+    .home-item {
+        padding-top: 150px;
+        grid-column-start: 3;
+        /* grid-column-end: span 5; */
+        /* grid-area: home-item; */
+        /* justify-self: start; */
+        /* color: white; */
+        /* width: 50%; */
+        /* display: inline-block; */
+        
+        /* padding-top: 100px; */
+        /* flex-basis: 75%; */
+        /* margin: 50px; */
+        /* border: 5px solid red; */
+    
+    }
+
 }
